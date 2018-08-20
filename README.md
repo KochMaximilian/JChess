@@ -1,3 +1,3 @@
-##JChess
+## JChess
 
 new repository for the Project.
