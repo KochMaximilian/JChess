@@ -300,12 +300,17 @@ public abstract class Move {
     public static final class NullMove extends Move {
 
         public NullMove() {
-            super(null, -1);
+            super(null, 65 ); // 65 is an invalid destination location
         }
 
         @Override
         public Board execute() {
             throw new RuntimeException("cannot execute the null move");
+        }
+
+        @Override
+        public int getCurrentCoordinate() {
+            return -1;
         }
     }
 
