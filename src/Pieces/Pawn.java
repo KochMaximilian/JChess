@@ -42,17 +42,17 @@ public class Pawn extends Piece
                 }
 
             }else if(currentCandidateOffset == 16 && this.isFirstMove() &&
-                    ((BoardUtils.SEVENTH_RANK[this.piecePosition]&&this.getPieceAlliance().isBlack()) ||
-                            (BoardUtils.SECOND_RANK[this.piecePosition]&&this.getPieceAlliance().isWhite()))){
-                final int behindCandidateDestinationCoordinate = this.piecePosition+(this.getPieceAlliance().getDirection()*8);
+                    ((BoardUtils.SEVENTH_RANK[this.piecePosition] && this.getPieceAlliance().isBlack()) ||
+                            (BoardUtils.SECOND_RANK[this.piecePosition] && this.getPieceAlliance().isWhite()))){
+                final int behindCandidateDestinationCoordinate = this.piecePosition+(this.getPieceAlliance().getDirection() * 8);
                 if(!board.getTile(behindCandidateDestinationCoordinate).isTileOccupied()&&
                         !board.getTile(candidateDestinationCoordinate).isTileOccupied()){
                     legalMoves.add(new PawnJump(board,this,candidateDestinationCoordinate));
                 }
             }
             else if(currentCandidateOffset == 7 &&
-                    !(BoardUtils.FIRST_COLUMN[this.piecePosition]&&this.getPieceAlliance().isBlack()||
-                            BoardUtils.EIGHTH_COLUMN[this.piecePosition]&&this.getPieceAlliance().isWhite()))
+                    !(BoardUtils.EIGHTH_COLUMN[this.piecePosition]&&this.getPieceAlliance().isBlack()||
+                            BoardUtils.FIRST_COLUMN[this.piecePosition]&&this.getPieceAlliance().isWhite()))
             {
                 final Tile pieceOnTile = board.getTile(candidateDestinationCoordinate);
                 if(pieceOnTile.isTileOccupied()) {
@@ -82,7 +82,6 @@ public class Pawn extends Piece
                 if(board.getTile(candidateDestinationCoordinate).isTileOccupied()) {
                     final Piece pieceOnCandidate = board.getTile(candidateDestinationCoordinate).getPiece();
                     if (this.pieceAlliance != pieceOnCandidate.pieceAlliance) {
-                        // TODO: 17.08.2018
                         if(this.pieceAlliance.isPawnPromotionSquare(candidateDestinationCoordinate)) {
                             legalMoves.add(new PawnPromotion(new PawnAttackMove(board, this, candidateDestinationCoordinate, pieceOnCandidate)));
                         }

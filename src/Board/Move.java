@@ -168,7 +168,7 @@ public abstract class Move {
             }
 
             final AttackMove otherAttackMove = (AttackMove) other;
-            return super.equals(otherAttackMove) && getAttackedPiece() == otherAttackMove.getAttackedPiece();
+            return super.equals(otherAttackMove) && getAttackedPiece().equals(otherAttackMove.getAttackedPiece());
         }
 
         @Override
