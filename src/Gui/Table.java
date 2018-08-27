@@ -47,7 +47,6 @@ public class Table {
     private final static Dimension TILE_PANEL_DIMENSION = new Dimension(10,10);
     private static String defaultPieceImagesPath = "art/pieces/plain/";
 
-
     private final Color lightTileColor = Color.decode("#e89c51");
     private final Color darkTileColor = Color.decode("#542f29");
 
@@ -305,6 +304,12 @@ public class Table {
             }
         }
 
+        private Collection<Move> pieceLegalMoves(Board board) {
+            if(humanMovedPiece != null && humanMovedPiece.getPieceAlliance() == board.currentPlayer().getAlliance()){
+                return humanMovedPiece.calculateLegalMoves(board);
+            }
+            return Collections.emptyList();
+        }
 
         private void highlightLegals(final Board board) {
             if(highlightLegalMoves) {
@@ -319,12 +324,5 @@ public class Table {
                 }
             }
         }
-    }
-
-    private Collection<Move> pieceLegalMoves(Board board) {
-        if(humanMovedPiece != null && humanMovedPiece.getPieceAlliance()==board.currentPlayer().getAlliance()){
-            return humanMovedPiece.calculateLegalMoves(board);
-        }
-        return Collections.emptyList();
     }
 }

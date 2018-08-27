@@ -12,6 +12,7 @@ import com.google.common.collect.Iterators;
 
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Board {
 
@@ -82,12 +83,14 @@ public class Board {
 
     private Collection<Move> calculateLegalMoves(final Collection<Piece> pieces) {
 
+        return pieces.stream().flatMap(piece -> piece.calculateLegalMoves(this).stream()).collect(Collectors.toList());
 
-        final List<Move> leaglMoves = new ArrayList<>();
+      /*  final List<Move> legalMoves = new ArrayList<>();
         for (final Piece piece : pieces) {
-            leaglMoves.addAll(piece.calculateLegalMoves(this));
+            legalMoves.addAll(piece.calculateLegalMoves(this));
         }
-        return ImmutableList.copyOf(leaglMoves);
+        return ImmutableList.copyOf(legalMoves);
+        */
     }
 
     private static Collection<Piece> calculateActivePieces(final List<Tile> gameBoard, final Alliance alliance) {
