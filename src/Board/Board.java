@@ -12,6 +12,7 @@ import com.google.common.collect.Iterators;
 
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Board {
 
@@ -19,18 +20,18 @@ public class Board {
     private final Collection<Piece> whitePieces;
     private final Collection<Piece> blackPieces;
 
-
     private final WhitePlayer whitePlayer;
     private final BlackPlayer blackPlayer;
-
     private final Player currentPlayer;
 
+    private final Pawn enPassantPawn;
 
     private Board(Builder builder) {
 
         this.gameBoard = createGameBoard(builder);
         this.whitePieces = calculateActivePieces(this.gameBoard, Alliance.WHITE);
         this.blackPieces = calculateActivePieces(this.gameBoard, Alliance.BLACK);
+        this.enPassantPawn = builder.enPassantPawn;
 
         final Collection<Move> whiteStandartMove = calculateLegalMoves(this.whitePieces);
         final Collection<Move> blackStandartMove = calculateLegalMoves(this.blackPieces);
@@ -68,6 +69,10 @@ public class Board {
         return this.currentPlayer;
     }
 
+    public Pawn getEnPassantPawn() {
+        return this.enPassantPawn;
+    }
+
     public Collection<Piece> getBlackPieces() {
         return this.blackPieces;
     }
@@ -78,12 +83,14 @@ public class Board {
 
     private Collection<Move> calculateLegalMoves(final Collection<Piece> pieces) {
 
+        return pieces.stream().flatMap(piece -> piece.calculateLegalMoves(this).stream()).collect(Collectors.toList());
 
-        final List<Move> leaglMoves = new ArrayList<>();
+      /*  final List<Move> legalMoves = new ArrayList<>();
         for (final Piece piece : pieces) {
-            leaglMoves.addAll(piece.calculateLegalMoves(this));
+            legalMoves.addAll(piece.calculateLegalMoves(this));
         }
-        return ImmutableList.copyOf(leaglMoves);
+        return ImmutableList.copyOf(legalMoves);
+        */
     }
 
     private static Collection<Piece> calculateActivePieces(final List<Tile> gameBoard, final Alliance alliance) {

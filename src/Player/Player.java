@@ -60,10 +60,9 @@ public  abstract class Player {
         throw new RuntimeException("You shall not chess! (board is not valid)");
     }
 
-    // TODO: 03.08.2018 Implement these methods  WIP
 
     public boolean isMoveLegal(final Move move) {
-        return this.legalMoves.contains(move); // TODO: 03.08.2018 tempoary
+        return this.legalMoves.contains(move); 
     }
 
 
@@ -103,15 +102,15 @@ public  abstract class Player {
 
     public MoveTransition makeMove(final Move move) {
 
-        if(!isMoveLegal(move)){
+        if(!this.legalMoves.contains(move)){
             return new MoveTransition(this.board, move, MoveStatus.ILLEGAL_MOVE);
         }
 
         final Board transitionBoard = move.execute();
 
-        final Collection<Move> kingAttackes = Player.calculateAttacksOnTile(transitionBoard.currentPlayer().getOpponent().getPalyerKing().getPiecePosition(),transitionBoard.currentPlayer().getLegalMoves());
+        final Collection<Move> kingAttacks = Player.calculateAttacksOnTile(transitionBoard.currentPlayer().getOpponent().getPalyerKing().getPiecePosition(),transitionBoard.currentPlayer().getLegalMoves());
 
-        if(!kingAttackes.isEmpty()) {
+        if(!kingAttacks.isEmpty()) {
             return new MoveTransition(this.board,move,MoveStatus.LEAVES_PLAYER_IN_CHECK);
         }
 
