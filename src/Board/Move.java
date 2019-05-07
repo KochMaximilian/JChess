@@ -279,6 +279,7 @@ public abstract class Move {
             for (final Piece piece : pawnMoveBoard.currentPlayer().getActivePieces()) {
                 if(!this.promotedPawn.equals(piece)) {
                     builder.setPiece(piece);
+
                 }
             }
             for (final Piece piece : pawnMoveBoard.currentPlayer().getOpponent().getActivePieces()) {

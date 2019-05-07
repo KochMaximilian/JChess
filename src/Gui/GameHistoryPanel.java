@@ -135,7 +135,7 @@ public class GameHistoryPanel extends JPanel {
 
 
         Row() {
-
+            // TODO: 2019-05-07  set a reminder to look into what belongs here
         }
 
         public String getWhiteMove() {

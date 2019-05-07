@@ -61,6 +61,7 @@ public class Board {
         return this.whitePlayer;
     }
 
+
     public Player blackPlayer() {
         return this.blackPlayer;
     }

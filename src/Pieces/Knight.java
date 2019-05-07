@@ -30,6 +30,7 @@ public class Knight extends Piece{
 
     @Override
     public Collection<Move> calculateLegalMoves(final Board board) {
+
         final List<Move> legalMoves = new ArrayList<>();
         for(int currentCandidateOffset: CANDIDATE_MOVE_COORDINATES){
             final int candidateDestinationCoordinate;
@@ -44,6 +45,7 @@ public class Knight extends Piece{
                 final Tile candidateDestinationTile = board.getTile(candidateDestinationCoordinate);
                 if(!candidateDestinationTile.isTileOccupied()){
                     legalMoves.add(new MajorMove(board,this,candidateDestinationCoordinate));
+
                 }
                 else{
                     final Piece pieceAtDestination = candidateDestinationTile.getPiece();
